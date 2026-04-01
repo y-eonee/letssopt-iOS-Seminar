@@ -10,13 +10,19 @@ import UIKit
 import SnapKit
 import Then
 
+protocol ItemCollectionViewCellDelegate: AnyObject {
+    func heartButtonDidTap(cell: ItemCollectionViewCell)
+}
+
 final class ItemCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "ItemCollectionViewCell"
+    
+    weak var delegate: ItemCollectionViewCellDelegate?
     
     private let itemImageView = UIImageView()
     private let nameLabel = UILabel()
     private let priceLabel = UILabel()
-    private let heartButton = UIButton()
+    let heartButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,10 +91,11 @@ extension ItemCollectionViewCell {
         itemImageView.image = itemData.itemImg
         nameLabel.text = itemData.name
         priceLabel.text = itemData.price
+        heartButton.isSelected = itemData.heartIsSelected
     }
     
     @objc
     private func heartButtonDidTap(){
-        heartButton.isSelected.toggle()
+        delegate?.heartButtonDidTap(cell: self)
     }
 }

@@ -16,7 +16,7 @@ final class ItemViewController: UIViewController {
     final let cellHeight: CGFloat = 198
     final let inset = UIEdgeInsets(top: 49, left: 20, bottom: 10, right: 20)
     
-    private let itemList = ItemModel.dummy()
+    private var itemList = ItemModel.dummy()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +98,17 @@ extension ItemViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        cell.delegate = self
         cell.dataBind(itemList[indexPath.row])
         return cell
+    }
+}
+
+extension ItemViewController: ItemCollectionViewCellDelegate {
+    func heartButtonDidTap(cell: ItemCollectionViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        itemList[indexPath.item].heartIsSelected.toggle()
+        cell.heartButton.isSelected.toggle()
     }
 }
