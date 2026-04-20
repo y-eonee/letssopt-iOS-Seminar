@@ -35,7 +35,7 @@ final class SignupService {
         }
     }
     
-    private func makeRequest(body: Data?) async throws -> URLRequest {
+    private func makeRequest(body: Data?) throws -> URLRequest {
         guard let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String else {
             throw NetworkError.urlError
         }
@@ -80,7 +80,7 @@ final class SignupService {
         guard let body = makeRequestBody(loginId: loginId, password: password, name: name, email: email, age: age, part: part)
         else { throw NetworkError.requestEncodingError}
         
-        let request = try await makeRequest(body: body)
+        let request = try makeRequest(body: body)
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
