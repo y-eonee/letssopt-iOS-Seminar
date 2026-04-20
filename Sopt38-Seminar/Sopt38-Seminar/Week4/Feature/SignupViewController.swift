@@ -90,6 +90,6 @@ extension SignupViewController {
     
     @objc
     private func getUsersButtonDidTap() {
-        
+        navigationController?.pushViewController(GetUsersListViewController(), animated: true)
     }
 }
