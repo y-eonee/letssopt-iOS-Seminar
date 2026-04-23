@@ -37,6 +37,7 @@ final class SignupViewController: UIViewController {
             $0.addTarget(self, action: #selector(textFieldDidEditingChanged(_:)), for: .editingChanged)
         }
         rootView.signupButton.addTarget(self, action: #selector(signupButtonDidTap), for: .touchUpInside)
+        rootView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         rootView.getUsersButton.addTarget(self, action: #selector(getUsersButtonDidTap), for: .touchUpInside)
     }
 }
@@ -86,6 +87,11 @@ extension SignupViewController {
                 print("회원가입 실패", error)
             }
         }
+    }
+    
+    @objc
+    private func loginButtonDidTap() {
+        navigationController?.pushViewController(LoginAPIViewController(), animated: true)
     }
     
     @objc

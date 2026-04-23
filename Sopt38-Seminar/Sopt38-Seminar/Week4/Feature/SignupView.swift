@@ -18,6 +18,7 @@ final class SignupView: UIView {
     let ageTextField = UITextField()
     let partTextField = UITextField()
     lazy var signupButton = UIButton()
+    lazy var loginButton = UIButton()
     lazy var getUsersButton = UIButton()
     
     override init(frame: CGRect) {
@@ -31,50 +32,35 @@ final class SignupView: UIView {
     }
     
     private func setUI() {
-        addSubviews(idTextField, passwordTextField, nameTextField, emailTextField, ageTextField, partTextField, signupButton, getUsersButton)
+        addSubviews(
+            idTextField, passwordTextField, nameTextField, emailTextField, ageTextField, partTextField,
+            signupButton, loginButton, getUsersButton
+        )
     }
     
     private func setStyle() {
         backgroundColor = .white
         
-        idTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "아이디"
-            $0.borderStyle = .roundedRect
-        }
+        let placeholder = ["아이디", "비밀번호", "이름", "이메일", "나이", "iOS, 안드로이드, 웹 중 하나를 입력해주세요."]
         
-        passwordTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "비밀번호"
-            $0.borderStyle = .roundedRect
-        }
-        
-        nameTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "이름"
-            $0.borderStyle = .roundedRect
-        }
-        
-        emailTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "이메일"
-            $0.borderStyle = .roundedRect
-        }
-        
-        ageTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "나이"
-            $0.borderStyle = .roundedRect
-        }
-        
-        partTextField.do {
-            $0.addLeftPadding()
-            $0.placeholder = "iOS, 안드로이드, 웹 중 하나를 입력해주세요."
-            $0.borderStyle = .roundedRect
-        }
+        [idTextField, passwordTextField, nameTextField, emailTextField, ageTextField, partTextField]
+            .enumerated()
+            .forEach { index, textField in
+                textField.do {
+                    $0.addLeftPadding()
+                    $0.placeholder = placeholder[index]
+                    $0.borderStyle = .roundedRect
+                }
+            }
         
         signupButton.do {
             $0.setTitle("회원가입", for: .normal)
+            $0.backgroundColor = .systemBlue
+            $0.layer.cornerRadius = 10
+        }
+        
+        loginButton.do {
+            $0.setTitle("로그인하기", for: .normal)
             $0.backgroundColor = .systemBlue
             $0.layer.cornerRadius = 10
         }
@@ -129,8 +115,14 @@ final class SignupView: UIView {
             $0.height.equalTo(50)
         }
         
-        getUsersButton.snp.makeConstraints {
+        loginButton.snp.makeConstraints {
             $0.top.equalTo(signupButton.snp.bottom).offset(10)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(50)
+        }
+        
+        getUsersButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(50)
         }
