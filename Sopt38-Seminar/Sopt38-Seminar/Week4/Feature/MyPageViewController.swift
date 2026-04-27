@@ -29,7 +29,7 @@ final class MyPageViewController: UIViewController {
     private func setAddTarget() {
         rootView.nameTextField.addTarget(self, action: #selector(textFieldDidEditingChanged(_:)), for: .editingChanged)
         rootView.emailTextField.addTarget(self, action: #selector(textFieldDidEditingChanged(_:)), for: .editingChanged)
-        rootView.partTextField.addTarget(self, action: #selector(textFieldDidEditingChanged(_:)), for: .editingChanged)
+        rootView.ageTextField.addTarget(self, action: #selector(textFieldDidEditingChanged(_:)), for: .editingChanged)
         rootView.editButton.addTarget(self, action: #selector(editButtonDidTap), for: .touchUpInside)
     }
 }
@@ -46,8 +46,6 @@ extension MyPageViewController {
             email = textField.text ?? ""
         case rootView.ageTextField:
             age = Int(textField.text ?? "") ?? 0
-        case rootView.partTextField:
-            part = textField.text ?? ""
         default:
             return
         }
@@ -65,10 +63,7 @@ extension MyPageViewController {
                 print("유저 정보 조회 \(response)")
                 rootView.updateUI(id: id, name: name, email: email, age: age, part: part)
             } catch {
-                let alert = UIAlertController()
-                alert.showAlert(title: "유저 정보 조회 실패", subMessage: error.localizedDescription)
-                self.present(alert, animated: true)
-                
+                self.showAlert(title: "유저 정보 조회 실패", subMessage: error.localizedDescription)
                 print("유저 정보 조회 실패", error)
             }
         }
@@ -84,15 +79,11 @@ extension MyPageViewController {
             do {
                 let _ = try await DefaultUserService.shared.patchUserInfo(name: name, email: email, age: age)
                 rootView.updateUI(name: name, email: email, age: age)
-                let alert = UIAlertController()
-                alert.showAlert(title: "유저 정보를 수정했습니다", subMessage: "수정 완료")
-                self.present(alert, animated: true)
+                self.showAlert(title: "유저 정보를 수정했습니다", subMessage: "수정 완료")
                 
                 print("유저 정보 수정 완료")
             } catch {
-                let alert = UIAlertController()
-                alert.showAlert(title: "수정 실패", subMessage: error.localizedDescription)
-                self.present(alert, animated: true)
+                self.showAlert(title: "수정 실패", subMessage: error.localizedDescription)
                 
                 print("유저 정보 수정 실패", error)
             }

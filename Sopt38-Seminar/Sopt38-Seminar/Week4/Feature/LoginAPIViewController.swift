@@ -54,10 +54,7 @@ extension LoginAPIViewController {
                 print("로그인 성공. 유저이이디 \(response.userId)")
                 navigationController?.pushViewController(MyPageViewController(), animated: true)
             } catch {
-                let alert = UIAlertController()
-                alert.showAlert(title: "로그인 실패", subMessage: error.localizedDescription)
-                self.present(alert, animated: true)
-                
+                self.showAlert(title: "로그인 실패", subMessage: error.localizedDescription)                
                 print("로그인 실패", error)
             }
         }

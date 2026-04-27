@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIAlertController {
+extension UIViewController {
     func showAlert(title: String, subMessage: String) {
         let alert = UIAlertController(
             title: title,
@@ -17,5 +17,6 @@ extension UIAlertController {
         
         let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
+        self.present(alert, animated: true)
     }
 }
