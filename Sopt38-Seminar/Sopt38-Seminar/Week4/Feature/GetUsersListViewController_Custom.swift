@@ -2,42 +2,24 @@
 //  GetUsersListViewController.swift
 //  Sopt38-Seminar
 //
-//  Created by 이나연 on 5/2/26.
+//  Created by 이나연 on 4/20/26.
 //
 
 import UIKit
 
-final class GetUsersListViewController: UIViewController {
+final class GetUsersListViewController_Custom: UIViewController {
+    private let rootView = GetUsersListView()
+    private let usersListTextView = UITextView()
+    
     private var userList: [UserData] = []
     
-    private let usersListTextView = UITextView()
+    override func loadView() {
+        view = rootView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
-        setStyle()
-        setLayout()
-        
         getUsersList()
-    }
-    
-    private func setUI() {
-        view.addSubview(usersListTextView)
-    }
-    
-    private func setStyle() {
-        view.backgroundColor = .white
-        
-        usersListTextView.do {
-            $0.font = .systemFont(ofSize: 15)
-            $0.isEditable = false
-        }
-    }
-    
-    private func setLayout() {
-        usersListTextView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(20)
-        }
     }
     
     private func getUsersList() {
@@ -46,7 +28,7 @@ final class GetUsersListViewController: UIViewController {
                 let response = try await GetUsersListService.shared.getUsersList()
                 userList = response
                 print("유저 리스트: \(response)")
-                updateUI(usersList: userList)
+                rootView.updateUI(usersList: userList)
             } catch {
                 let alert = UIAlertController(
                     title: "유저 조회 실패",
@@ -62,12 +44,4 @@ final class GetUsersListViewController: UIViewController {
             }
         }
     }
-    
-    private func updateUI(usersList: [UserData]) {
-        usersListTextView.text = usersList
-            .map { "id: \($0.id), 이름: \($0.name), 파트:  \($0.part)" }
-            .joined(separator: "\n")
-    }
 }
-
-

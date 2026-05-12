@@ -65,7 +65,7 @@ final class GetUsersListService {
         
         do{
             let decoded = try JSONDecoder().decode(GetUsersListResponseDTO.self, from: data)
-            return decoded.data
+            return decoded.data.users
         } catch {
             throw error
         }

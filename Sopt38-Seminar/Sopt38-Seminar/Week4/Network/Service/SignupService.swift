@@ -92,12 +92,17 @@ final class SignupService {
         
         dump("Response \(response)")
         
+        if let responseString = String(data: data, encoding: .utf8) {
+            print("Response Body: \(responseString)")
+        }
+        
         guard(200...299).contains(httpRespones.statusCode) else {
             throw configureHTTPError(errorCode: httpRespones.statusCode)
         }
         
         do{
             let decoded = try JSONDecoder().decode(SignupResponseDTO.self, from: data)
+            print(decoded)
             return decoded
         } catch {
             throw error

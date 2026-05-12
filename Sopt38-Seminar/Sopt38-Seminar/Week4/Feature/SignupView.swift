@@ -50,6 +50,9 @@ final class SignupView: UIView {
                     $0.addLeftPadding()
                     $0.placeholder = placeholder[index]
                     $0.borderStyle = .roundedRect
+                    $0.autocapitalizationType = .none
+                    $0.autocorrectionType = .no
+                    $0.spellCheckingType = .no
                 }
             }
         

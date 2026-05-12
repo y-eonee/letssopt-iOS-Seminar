@@ -47,7 +47,7 @@ final class GetUsersListView: UIView {
 extension GetUsersListView {
     func updateUI(usersList: [UserData]) {
         usersListTextView.text = usersList
-            .map { "\($0.name) / \($0.part)" }
+            .map { "id: \($0.id), 이름: \($0.name), 파트:  \($0.part)" }
             .joined(separator: "\n")
     }
 }
