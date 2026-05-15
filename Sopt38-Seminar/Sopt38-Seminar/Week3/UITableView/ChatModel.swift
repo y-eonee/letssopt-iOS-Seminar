@@ -29,7 +29,8 @@ extension ChatModel {
             ChatModel(profileImg: .profile4, name: "임성환", place: "태국", message: "네.", itemImg: .product1),
             ChatModel(profileImg: .profile1, name: "장지인", place: "명왕성", message: "나 아요 아기", itemImg: .product2),
             ChatModel(profileImg: .profile2, name: "신서연", place: "안드로메다", message: "수고하세용", itemImg: .product3),
-            ChatModel(profileImg: .profile3, name: "이서영", place: "뭘보슈", message: "집에갈래", itemImg: .product4)
+            ChatModel(profileImg: .profile3, name: "이서영", place: "뭘보슈", message: "집에갈래", itemImg: .product4),
+            ChatModel(profileImg: .profile4, name: "최주희", place: "하암", message: "헐", itemImg: .product5)
         ]
     }
 }
